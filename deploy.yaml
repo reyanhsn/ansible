@@ -2,6 +2,8 @@
 - name: Créer deux VM
   hosts: localhost
   gather_facts: no
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   vars_files:
     - /home/semaphore/myvault.yaml
   tasks:
