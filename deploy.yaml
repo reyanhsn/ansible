@@ -1,5 +1,5 @@
 ---
-- name: Créer deux VM
+- name: Créer des VMs sur ESXi sans installation automatisée
   hosts: localhost
   gather_facts: no
   vars:
@@ -7,16 +7,16 @@
   vars_files:
     - /home/semaphore/myvault.yaml
   tasks:
-    - name: Elasticsearch
+    - name: Créer la VM OpenSearch
       community.vmware.vmware_guest:
-        hostname: "{{esxi_hostname}}"
-        username: "{{esxi_username}}"
-        password: "{{esxi_password}}"
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
         validate_certs: no
         folder: "/vm"
         name: OpenSearch_soc
         state: poweredon
-        guest_id: centos64Guest
+        guest_id: "otherLinux64Guest"
         disk:
           - size_gb: 50
             type: thin
@@ -30,18 +30,18 @@
             device_type: vmxnet3
         cdrom:
           type: iso
-          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst(1).iso"
+          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst.iso"
 
-    - name: logstash
+    - name: Créer la VM Logstash
       community.vmware.vmware_guest:
-        hostname: "{{esxi_hostname}}"
-        username: "{{esxi_username}}"
-        password: "{{esxi_password}}"
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
         validate_certs: no
         folder: "/vm"
         name: Logstash_soc
         state: poweredon
-        guest_id: centos64Guest
+        guest_id: "otherLinux64Guest"
         disk:
           - size_gb: 30
             type: thin
@@ -55,18 +55,18 @@
             device_type: vmxnet3
         cdrom:
           type: iso
-          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst(1).iso"
+          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst.iso"
 
-    - name: Grafana
+    - name: Créer la VM Grafana
       community.vmware.vmware_guest:
-        hostname: "{{esxi_hostname}}"
-        username: "{{esxi_username}}"
-        password: "{{esxi_password}}"
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
         validate_certs: no
         folder: "/vm"
         name: Grafana_soc
         state: poweredon
-        guest_id: centos64Guest
+        guest_id: "otherLinux64Guest"
         disk:
           - size_gb: 10
             type: thin
@@ -80,18 +80,18 @@
             device_type: vmxnet3
         cdrom:
           type: iso
-          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst(1).iso"
+          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst.iso"
 
-    - name: Client1_soc
+    - name: Créer la VM Client1
       community.vmware.vmware_guest:
-        hostname: "{{esxi_hostname}}"
-        username: "{{esxi_username}}"
-        password: "{{esxi_password}}"
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
         validate_certs: no
         folder: "/vm"
         name: Client1_soc
         state: poweredon
-        guest_id: centos64Guest
+        guest_id: "otherLinux64Guest"
         disk:
           - size_gb: 10
             type: thin
@@ -105,18 +105,18 @@
             device_type: vmxnet3
         cdrom:
           type: iso
-          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst(1).iso"
+          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst.iso"
 
-    - name: Client2_soc
+    - name: Créer la VM Client2
       community.vmware.vmware_guest:
-        hostname: "{{esxi_hostname}}"
-        username: "{{esxi_username}}"
-        password: "{{esxi_password}}"
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
         validate_certs: no
         folder: "/vm"
         name: Client2_soc
         state: poweredon
-        guest_id: centos64Guest
+        guest_id: "otherLinux64Guest"
         disk:
           - size_gb: 40
             type: thin
@@ -130,4 +130,4 @@
             device_type: vmxnet3
         cdrom:
           type: iso
-          iso_path: "[VMFS1] ISO/SW_DVD9_Win_Server_STD_CORE_2019_1809.18_64Bit_English_DC_STD_MLF_X22-74330.ISO"
+          iso_path: "[VMFS1] ISO/debian-11.3.0-amd64-netinst.iso"
